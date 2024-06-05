@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task4/views/play_music.dart';
+import '../widgets/category_list.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -9,6 +9,20 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    CategoryList(),
+    Text('Explore Screen'),
+    Text('Library Screen'),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,23 +44,26 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
         title: Text(
-          "Welcome Back!",
+          "Musify",
           style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey.shade800),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey.shade800,
+          ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined), label: 'Explore'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.folder_outlined), label: 'Library'),
-      ],
-      backgroundColor: Colors.white,),
-    
-      body: const MusicPlayer(),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search_outlined), label: 'Explore'),
+          BottomNavigationBarItem(icon: Icon(Icons.folder_outlined), label: 'Library'),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:task4/views/dashboard.dart';
-
+import 'views/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: GoogleFonts.spaceGroteskTextTheme()
+        textTheme: GoogleFonts.spaceGroteskTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
       home: const Dashboard(),
